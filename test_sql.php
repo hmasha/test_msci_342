@@ -1,16 +1,10 @@
 <?php
-  DEFINE('DB_USERNAME', 'PostgreSQL 10.0');
-  DEFINE('DB_PASSWORD', 'root');
-  DEFINE('DB_HOST', 'localhost');
-  DEFINE('DB_DATABASE', 'team1');
 
-  $mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+  $mysqli = pg_connect("host=localhost port=5432 dbname=team1 user=postgres password=root");
 
-  if (mysqli_connect_error()) {
-    die('Connect Error ('.mysqli_connect_errno().') '.mysqli_connect_error());
-  }
+  $result = pg_query($mysqli, "select * from pg_stat_activity");
+var_dump(pg_fetch_all($result));
 
-  //echo 'Connected successfully.';
 
   
 ?>
